@@ -1,0 +1,60 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>BoatRequestList</title>
+</head>
+<body>
+    <div>
+        <h1 style="color:navy">Boat Request Availability</h1>
+    </div>
+    <hr />
+    <div>
+        @using (Html.BeginForm("BoatRequestList", "BoatRequest", FormMethod.Post))
+        {
+            <label for="boatNumber"><b>Search Boat Number</b></label>
+            <input type="text" placeholder="Enter Boat Number" name="boatNumber" id="boatNumber" required>
+            <button type="submit" id="BoatRequestList">Search</button>
+        }
+    </div>
+    <div>
+        @if (ViewBag.Message != null)
+        {
+            <p style="color:red">@ViewBag.Message</p>
+        }
+    </div>
+    <hr />
+    <div>       
+        <table cellpadding="0" cellspacing="0" border="1" width="100%">
+            <tr>
+                <th>BoatID</th>
+                <th>BoatNumber</th>
+                <th>CustomerName</th>
+                <th>ImageName</th>
+                <th>BoatRate</th>
+                <th>BoatStatus</th>
+            </tr>
+            @foreach (System.Data.DataRow row in Model.Tables[0].Rows)
+            {
+                <tr>
+                    <td>@row["BOAT_ID"]</td>
+                    <td>@row["BOAT_NUMBER"]</td>
+                    <td>@row["CUSTOMER_NAME"]</td>
+                    <td>@row["IMAGE_NAME"]</td>
+                    <td>@row["BOAT_RATE"]</td>
+                    <td>@row["BOAT_STATUS"]</td>
+                </tr>
+            }
+        </table>
+    </div>
+    <br />
+    <div>
+        @Html.ActionLink("Back to boat request", "BoatRequestForm")
+    </div>
+</body>
+</html>
